@@ -1,0 +1,17 @@
+services:
+  zmk-build:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        ZEPHYR_VERSION: "3.5.0"
+        ARCHITECTURE: "arm"
+        ZEPHYR_SDK_VERSION: "0.16.3"
+    working_dir: /zmk/app
+    volumes:
+      - ./build:/zmk/app/build
+      - ${ZMK_CONFIG}:/zmk-config
+      - ${ZMK_NAGINATA}:/zmk-naginata
+      - ${ZMK_RGB}:/zmk-rgbled-widget
+      - ${ZMK_HELPERS}:/zmk-helpers
+    command: /bin/bash -c 'west build -b $$BOARD -- -DSHIELD=$$SHIELD -DZMK_CONFIG="/zmk-config/config" -DZMK_EXTRA_MODULES="/zmk-naginata;/zmk-rgbled-widget;/zmk-helpers"'

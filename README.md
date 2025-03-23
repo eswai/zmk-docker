@@ -1,3 +1,19 @@
+# ZMK Docker
+
+ZMKのレポジトリにあるzmk-dockerはZMK自体をcloneしてくる必要があります。
+ここでは、Dockerイメージの中にZMKをcloneして環境を閉じ込めた状態でファームウェアをビルドする環境を構築します。
+
+.env.sampleを.envにリネームして環境変数を設定してください。
+docker-compose.ymlのEXTRA_MODULESを調整してください。
+
+```
+docker-compose run --rm -e BOARD=seeeduino_xiao_ble -e SHIELD=mable_left zmk-build
+```
+
+build/zephyr/zmk.uf2 にファームウェアができます。
+
+## 
+
 Lightweight Docker images for [ZMK][zmk].
 
 ### Platforms

@@ -113,6 +113,13 @@ RUN \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
+WORKDIR /
+RUN git clone https://github.com/zmkfirmware/zmk.git
+
+WORKDIR /zmk
+RUN west init -l app/
+RUN west update
+
 #------------------------------------------------------------------------------
 
 FROM dev-generic AS dev
