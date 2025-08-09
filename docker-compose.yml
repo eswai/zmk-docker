@@ -7,6 +7,7 @@ services:
         ZEPHYR_VERSION: "3.5.0"
         ARCHITECTURE: "arm"
         ZEPHYR_SDK_VERSION: "0.16.3"
+        ZMK_VERSION: "v0.3"
     working_dir: /zmk/app
     volumes:
       - ./build:/zmk/app/build
@@ -14,4 +15,5 @@ services:
       - ${ZMK_NAGINATA}:/zmk-naginata
       - ${ZMK_RGB}:/zmk-rgbled-widget
       - ${ZMK_HELPERS}:/zmk-helpers
-    command: /bin/bash -c 'west build -b $$BOARD -- -DSHIELD=$$SHIELD -DZMK_CONFIG="/zmk-config/config" -DZMK_EXTRA_MODULES="/zmk-naginata;/zmk-rgbled-widget;/zmk-helpers"'
+      - ${PROSPECTOR}:/prospector-zmk-module
+    command: /bin/bash -c 'west build -b $$BOARD -- -DSHIELD=$$SHIELD -DZMK_CONFIG="/zmk-config/config" -DZMK_EXTRA_MODULES="/zmk-naginata;/zmk-rgbled-widget;/zmk-helpers;/prospector-zmk-module"'

@@ -114,7 +114,7 @@ RUN \
   && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /
-RUN git clone https://github.com/zmkfirmware/zmk.git
+RUN git clone -b main ${ZMK_VERSION} https://github.com/zmkfirmware/zmk.git
 
 WORKDIR /zmk
 RUN west init -l app/
